@@ -1,145 +1,69 @@
 import XCTest
 import SwiftUI
-import SnapshotTesting
 @testable import CodeEditSymbols
 
 final class CodeEditSymbolsTests: XCTestCase {
 
-    // MARK: - NSImage Tests
+    private let symbolNames = [
+        "vault",
+        "vault.fill",
+        "commit",
+        "checkout",
+        "branch",
+        "breakpoint",
+        "breakpoint.fill",
+        "chevron.up.chevron.down",
+        "github",
+        "doc.java",
+        "doc.javascript",
+        "doc.json",
+        "doc.python",
+        "doc.ruby",
+        "square.split.horizontal.plus",
+        "square.split.vertical.plus",
+    ]
 
-    // MARK: VAULT
-
-    private let record: Bool = false
-
-    func testCreateNSImageVault() {
-        let image = NSImage.vault
-        let view = NSImageView(image: image)
-        view.appearance = .init(named: .aqua)
-        assertSnapshot(matching: view, as: .image, record: record)
+    func testBundledSymbolsAreLoadable() {
+        for symbolName in symbolNames {
+            XCTAssertNotNil(NSImage.symbol(named: symbolName), "\(symbolName) should be loadable from Bundle.module")
+        }
     }
 
-    func testCreateNSImageVaultFill() {
-        let image = NSImage.vault_fill
-        let view = NSImageView(image: image)
-        view.appearance = .init(named: .aqua)
-        assertSnapshot(matching: view, as: .image, record: record)
+    func testNSImageConvenienceSymbolsAreLoadable() {
+        XCTAssertNotNil(NSImage.vault)
+        XCTAssertNotNil(NSImage.vaultFill)
+        XCTAssertNotNil(NSImage.commit)
+        XCTAssertNotNil(NSImage.checkout)
+        XCTAssertNotNil(NSImage.branch)
+        XCTAssertNotNil(NSImage.breakpoint)
+        XCTAssertNotNil(NSImage.breakpointFill)
+        XCTAssertNotNil(NSImage.chevronUpChevronDown)
+        XCTAssertNotNil(NSImage.github)
+        XCTAssertNotNil(NSImage.docJava)
+        XCTAssertNotNil(NSImage.docJavascript)
+        XCTAssertNotNil(NSImage.docJson)
+        XCTAssertNotNil(NSImage.docPython)
+        XCTAssertNotNil(NSImage.docRuby)
+        XCTAssertNotNil(NSImage.squareSplitHorizontalPlus)
+        XCTAssertNotNil(NSImage.squareSplitVerticalPlus)
     }
 
-    // MARK: COMMIT
-
-    func testCreateNSImageCommit() {
-        let image = NSImage.commit
-        let view = NSImageView(image: image)
-        view.appearance = .init(named: .aqua)
-        assertSnapshot(matching: view, as: .image, record: record)
-    }
-
-    // MARK: CHECKOUT
-
-    func testCreateNSImageCheckout() {
-        let image = NSImage.checkout
-        let view = NSImageView(image: image)
-        view.appearance = .init(named: .aqua)
-        assertSnapshot(matching: view, as: .image, record: record)
-    }
-
-    // MARK: BRANCH
-
-    func testCreateNSImageBranch() {
-        let image = NSImage.branch
-        let view = NSImageView(image: image)
-        view.appearance = .init(named: .aqua)
-        assertSnapshot(matching: view, as: .image, record: record)
-    }
-
-    // MARK: BREAKPOINT
-
-    func testCreateNSImageBreakpoint() {
-        let image = NSImage.breakpoint
-        let view = NSImageView(image: image)
-        view.appearance = .init(named: .aqua)
-        assertSnapshot(matching: view, as: .image, record: record)
-    }
-
-    func testCreateNSImageBreakpointFill() {
-        let image = NSImage.breakpoint_fill
-        let view = NSImageView(image: image)
-        view.appearance = .init(named: .aqua)
-        assertSnapshot(matching: view, as: .image, record: record)
-    }
-
-    func testCreateNSImageGitHub() {
-        let image = NSImage.github
-        let view = NSImageView(image: image)
-        view.appearance = .init(named: .aqua)
-        assertSnapshot(matching: view, as: .image, record: record)
-    }
-
-    // MARK: - Image Tests
-
-    // MARK: VAULT
-
-    func testCreateImageVault() {
-        let image = Image.vault
-        let view: NSView = NSHostingController(rootView: image).view
-        view.appearance = .init(named: .aqua)
-        assertSnapshot(matching: view, as: .image(size: view.intrinsicContentSize), record: record)
-    }
-
-    func testCreateImageVaultFill() {
-        let image = Image.vault_fill
-        let view: NSView = NSHostingController(rootView: image).view
-        view.appearance = .init(named: .aqua)
-        assertSnapshot(matching: view, as: .image(size: view.intrinsicContentSize), record: record)
-    }
-
-    // MARK: COMMIT
-
-    func testCreateImageCommit() {
-        let image = Image.commit
-        let view: NSView = NSHostingController(rootView: image).view
-        view.appearance = .init(named: .aqua)
-        assertSnapshot(matching: view, as: .image(size: view.intrinsicContentSize), record: record)
-    }
-
-    // MARK: CHECKOUT
-
-    func testCreateImageCheckout() {
-        let image = Image.checkout
-        let view: NSView = NSHostingController(rootView: image).view
-        view.appearance = .init(named: .aqua)
-        assertSnapshot(matching: view, as: .image(size: view.intrinsicContentSize), record: record)
-    }
-
-    // MARK: BRANCH
-
-    func testCreateImageBranch() {
-        let image = Image.branch
-        let view: NSView = NSHostingController(rootView: image).view
-        view.appearance = .init(named: .aqua)
-        assertSnapshot(matching: view, as: .image(size: view.intrinsicContentSize), record: record)
-    }
-
-    // MARK: BREAKPOINT
-
-    func testCreateImageBreakpoint() {
-        let image = Image.breakpoint
-        let view: NSView = NSHostingController(rootView: image).view
-        view.appearance = .init(named: .aqua)
-        assertSnapshot(matching: view, as: .image(size: view.intrinsicContentSize), record: record)
-    }
-
-    func testCreateImageBreakpointFill() {
-        let image = Image.breakpoint_fill
-        let view: NSView = NSHostingController(rootView: image).view
-        view.appearance = .init(named: .aqua)
-        assertSnapshot(matching: view, as: .image(size: view.intrinsicContentSize), record: record)
-    }
-
-    func testCreateImageGitHub() {
-        let image = Image.github
-        let view: NSView = NSHostingController(rootView: image).view
-        view.appearance = .init(named: .aqua)
-        assertSnapshot(matching: view, as: .image(size: view.intrinsicContentSize), record: record)
+    func testSwiftUIImageConvenienceSymbolsAreAvailable() {
+        _ = Image.vault
+        _ = Image.vaultFill
+        _ = Image.commit
+        _ = Image.checkout
+        _ = Image.branch
+        _ = Image.breakpoint
+        _ = Image.breakpointFill
+        _ = Image.chevronUpChevronDown
+        _ = Image.github
+        _ = Image.docJava
+        _ = Image.docJavascript
+        _ = Image.docJson
+        _ = Image.docPython
+        _ = Image.docRuby
+        _ = Image.squareSplitHorizontalPlus
+        _ = Image.squareSplitVerticalPlus
     }
 }

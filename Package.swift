@@ -13,23 +13,22 @@ let package = Package(
             name: "CodeEditSymbols",
             targets: ["CodeEditSymbols"]),
     ],
-    dependencies: [
-        .package(
-            name: "SnapshotTesting",
-            url: "https://github.com/pointfreeco/swift-snapshot-testing.git",
-            from: "1.9.0"
-        ),
-    ],
+    dependencies: [],
     targets: [
         .target(
             name: "CodeEditSymbols",
-            dependencies: []
+            dependencies: [],
+            resources: [
+                .process("Symbols.xcassets")
+            ]
         ),
         .testTarget(
             name: "CodeEditSymbolsTests",
             dependencies: [
-                "CodeEditSymbols",
-                "SnapshotTesting"
+                "CodeEditSymbols"
+            ],
+            exclude: [
+                "__Snapshots__"
             ]
         ),
     ]

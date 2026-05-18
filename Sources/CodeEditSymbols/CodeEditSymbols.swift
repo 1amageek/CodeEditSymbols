@@ -5,13 +5,28 @@
 //
 
 import SwiftUI
+import AppKit
+
+private enum SymbolResource {
+    static func url(for symbol: String) -> URL? {
+        Bundle.module.url(
+            forResource: symbol,
+            withExtension: "svg",
+            subdirectory: "Symbols.xcassets/\(symbol).symbolset"
+        )
+    }
+}
 
 public extension Image {
 
     /// Creates an Image representing a custom SF Symbol
     /// - Parameter symbol: The name of the symbol in `Symbols.xcassets`
     init(symbol: String) {
-        self.init(symbol, bundle: Bundle.module)
+        if let image = NSImage.symbol(named: symbol) {
+            self.init(nsImage: image)
+        } else {
+            self.init(symbol, bundle: Bundle.module)
+        }
     }
 
     // MARK: - Symbols
@@ -44,7 +59,13 @@ public extension NSImage {
     /// - Parameter named: The name of the symbol in `Symbols.xcassets`
     /// - Returns: a NSImage
     static func symbol(named: String) -> NSImage? {
-        Bundle.module.image(forResource: named)
+        guard let url = SymbolResource.url(for: named),
+              let image = NSImage(contentsOf: url)
+        else {
+            return nil
+        }
+        image.isTemplate = true
+        return image
     }
 
     // MARK: - Symbols
