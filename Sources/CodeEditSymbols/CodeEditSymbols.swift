@@ -45,6 +45,7 @@ public extension Image {
     static let docJson: Image = .init(symbol: "doc.json")
     static let docPython: Image = .init(symbol: "doc.python")
     static let docRuby: Image = .init(symbol: "doc.ruby")
+    static let plus: Image = .init(symbol: "plus")
     static let squareSplitHorizontalPlus: Image = .init(symbol: "square.split.horizontal.plus")
     static let squareSplitVerticalPlus: Image = .init(symbol: "square.split.vertical.plus")
     
@@ -84,6 +85,7 @@ public extension NSImage {
     static let docJson: NSImage? = .symbol(named: "doc.json")
     static let docPython: NSImage? = .symbol(named: "doc.python")
     static let docRuby: NSImage? = .symbol(named: "doc.ruby")
+    static let plus: NSImage? = .symbol(named: "plus")
     static let squareSplitHorizontalPlus: NSImage? = .symbol(named: "square.split.horizontal.plus")
     static let squareSplitVerticalPlus: NSImage? = .symbol(named: "square.split.vertical.plus")
     
